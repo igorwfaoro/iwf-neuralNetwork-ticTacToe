@@ -18,8 +18,8 @@ To run this game, you will need Node.js installed on your computer. Follow these
 
 1. Clone the repository to your local machine.
 2. Navigate to the directory where you cloned the repository.
-3. Run `npm install` to install the dependencies.
-4. Execute `node main.ts` to start the game.
+3. Run `yarn` to install the dependencies.
+4. Execute `yarn start` to start the game.
 
 ## Neural Network Strategy
 
