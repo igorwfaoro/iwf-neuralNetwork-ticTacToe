@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "dev": "ts-node src/main.ts"
+  },
+  "devDependencies": {
+    "@types/prompt-sync": "^4.2.3",
+    "prettier": "^3.2.5",
+    "prettier-plugin-organize-imports": "^3.2.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  }
+}
