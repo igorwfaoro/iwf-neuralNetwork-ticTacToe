@@ -1,5 +1,5 @@
 import { arrayMatrixDot } from './helpers/array.helper';
-import { sigmoid } from './helpers/sigmoid.helper';
+import { sigmoid } from './helpers/math.helper';
 
 export interface NeuralNetwork {
   forward: (input: number[]) => number[];
@@ -31,6 +31,43 @@ export const createNeuralNetwork = ({
     );
 
     return outputLayer;
+  };
+
+  /**
+   * Back Propagation
+   * - Loss function: Mean Square Error (MSE)
+   * - Propagate the error backwards in the network
+   * - Updating weights
+   */
+  const backProp = ({
+    input,
+    target,
+    output,
+    learningRate = 1
+  }: {
+    input: number[];
+    target: number[];
+    output: number[];
+    learningRate?: number;
+  }) => {};
+
+  /**
+   * Mean Squared Error Loss Function
+   *
+   * Calculate how much  the Network got it wrong.
+   * This is used to penalize the model.
+   */
+  const mse = (output: number[], target: number[]): number => {
+    if (output.length !== target.length) {
+      throw new Error('Arrays output and target must be of the same length.');
+    }
+
+    const sumOfSquares = output.reduce((acc, currentValue, index) => {
+      const error = currentValue - target[index];
+      return acc + error * error;
+    }, 0);
+
+    return sumOfSquares / output.length;
   };
 
   // weights to connect the input layer to the hidden layer
