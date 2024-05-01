@@ -1,4 +1,9 @@
+import { arrayMatrixDot } from './helpers/array.helper';
 import { sigmoid } from './helpers/sigmoid.helper';
+
+export interface NeuralNetwork {
+  forward: (input: number[]) => number[];
+}
 
 export const createNeuralNetwork = ({
   inputSize,
@@ -8,10 +13,10 @@ export const createNeuralNetwork = ({
   inputSize: number;
   hiddenSize: number;
   outputSize: number;
-}) => {
+}): NeuralNetwork => {
   /**
    * Forward Propagation (using sigmoid to activate)
-   * 
+   *
    * Calculate the output of network, for a given input
    * - Product from input to hidden layer
    * - Product from hidden to output layer
@@ -38,5 +43,5 @@ export const createNeuralNetwork = ({
     Array.from({ length: outputSize }).map(Math.random)
   );
 
-  console.log(forward([0, 0, 0, 1, 1, 1, -1, -1, 0]));
+  return { forward };
 };

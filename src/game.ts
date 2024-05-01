@@ -1,10 +1,16 @@
 import promptInstance from 'prompt-sync';
+import { NeuralNetwork } from './neural-network';
 import { GameState } from './types/game-state';
 import { Player } from './types/player';
+import { maxByOrNull } from './helpers/array.helper';
 
 const prompt = promptInstance({ sigint: true });
 
-export const createGame = () => {
+export const createGame = ({
+  neuralNetwork
+}: {
+  neuralNetwork: NeuralNetwork;
+}) => {
   const board: (Player | 0)[] = Array(9).fill(Player.EMPTY);
 
   let currentPlayer = Player.HUMAN;
@@ -36,10 +42,27 @@ export const createGame = () => {
   const aiPlays = () => {
     console.log('AI turn');
 
+    const moveProbabilities = neuralNetwork.forward(board);
+    const validMoves = board
+      .map((value, idx) => ({ idx, value }))
+      .filter(({ value }) => value === Player.EMPTY);
+
+    const bestMove =
+      maxByOrNull(validMoves, (item) => moveProbabilities[item.idx])?.idx || -1;
+
     let position: number;
-    do {
-      position = Math.floor(Math.random() * board.length);
-    } while (board[position] !== Player.EMPTY);
+
+    if (bestMove >= 0) {
+      position = bestMove;
+
+      console.log('AI has played based on probabilities');
+    } else {
+      do {
+        position = Math.floor(Math.random() * board.length);
+      } while (board[position] !== Player.EMPTY);
+
+      console.log('AI has played randomly');
+    }
 
     board[position] = Player.AI;
     currentPlayer = Player.HUMAN;

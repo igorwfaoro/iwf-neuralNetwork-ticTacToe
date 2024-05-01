@@ -11,7 +11,7 @@ const run = () => {
   });
 
   while (true) {
-    const game = createGame();
+    const game = createGame({ neuralNetwork });
 
     console.log("Let's play Tic Tack Toe!");
 
