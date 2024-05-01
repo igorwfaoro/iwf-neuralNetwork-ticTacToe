@@ -22,7 +22,7 @@ export const createGame = () => {
 
     let position: number;
     do {
-      position = Number(prompt('Choose a position: '));
+      position = Number(prompt('Choose a position (0-8): '));
     } while (
       board[position] !== Player.EMPTY ||
       position >= board.length ||
